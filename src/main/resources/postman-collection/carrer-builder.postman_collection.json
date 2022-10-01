@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "1514415c-9cdb-45da-a8b5-861aa493db6a",
+		"name": "carrer-builder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signupUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"rohit3\",\r\n    \"dob\":\"1986-12-27\",\r\n    \"phone\":\"9464518946\",\r\n    \"address\":\"jalandhar\",\r\n    \"password\": \"Rohit3@123456new\",\r\n    \"email\": \"rohit3@gmail.com\",\r\n    \"firstName\": \"rohit\",\r\n    \"gender\":\"MALE\",\r\n    \"lastName\": \"mehra\",\r\n    \"roles\": [\r\n        {\r\n            \"id\":1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{job-server-url}}/api/auth/signup",
+							"host": [
+								"{{job-server-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signinUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2hpdE1laHJhIiwiaWF0IjoxNjIwNjU0MzgyLCJleHAiOjE2MjA2NTQ0NDJ9.ai-Erth8JwZ4zn5NWz2utbSNPv88pAdZbdqv0DV5gwy8ikKNxiWkMH6WTRVufk4jgMTuErVbGPq9DAChP6BJIg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Rest@123\",\r\n    \"username\": \"rohit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{job-server-url}}/api/auth/signin",
+							"host": [
+								"{{job-server-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refreshToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"74a1bc42-3c11-42ca-be05-eaab94b6bed5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{job-server-url}}/api/auth/refreshtoken",
+							"host": [
+								"{{job-server-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refreshtoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logoutUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{job-server-url}}/api/auth/logout/:userId",
+							"host": [
+								"{{job-server-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllRoles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{job-server-url}}/api/auth/get-roles",
+							"host": [
+								"{{job-server-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"get-roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
