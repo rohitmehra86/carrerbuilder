@@ -29,6 +29,7 @@ jobs:
           pwd
           ls
           mvn clean install
+          echo $GITHUB_ACTION
       - name: Open Issue
         if: failure()
         uses: JasonEtco/create-an-issue@v2
