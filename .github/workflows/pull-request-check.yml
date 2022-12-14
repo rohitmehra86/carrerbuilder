@@ -37,6 +37,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           assignees: rohitmehra86
+      - name: Link Issue
+        uses: tkt-actions/add-issue-links@v1.8.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }} # required
+          branch-prefix: 'issue-' # required
       - name: Send custom JSON data to Slack workflow
         id: slack
         if: failure()
@@ -45,16 +50,16 @@ jobs:
           # This data can be any valid JSON from a previous step in the GitHub Action
           payload: |
             {
-              "text": "Deployment started (In Progress)",
+              "text": "Need to work on the <${{ steps.create-issue.outputs.url }}|github issue>",
               "attachments": [
                 {
-                  "pretext": "Deployment started",
+                  "pretext": "Need to work",
                   "color": "dbab09",
                   "fields": [
                     {
                       "title": "Status",
                       "short": true,
-                      "value": "In Progress"
+                      "value": "Open"
                     }
                   ]
                 }
