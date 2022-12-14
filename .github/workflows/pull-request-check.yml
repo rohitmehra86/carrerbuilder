@@ -38,6 +38,7 @@ jobs:
         with:
           assignees: rohitmehra86
       - name: test url
+        if: failure()
         run: 'echo Created ${{ steps.create-issue.outputs.url }}'
       - name: Send custom JSON data to Slack workflow
         id: slack
