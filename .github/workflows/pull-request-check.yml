@@ -1,0 +1,40 @@
+---
+name: Execute upgrade utility
+on:
+  pull_request:
+    branches:
+      - main
+#    paths:
+#      - '**/resources/upgrade/upgrade.json'
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java:
+          - 17
+    name: Initiates upgrade utility
+    timeout-minutes: 30
+    steps:
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@v1.6.0
+        with:
+          java-version: ${{ matrix.java }}
+          maven-version: ${{ matrix.maven }}
+
+
+      - name: Run Upgrade utility
+        env:
+          FOLDER_PATH: ~/repo
+          GITHUB_USER: $GITHIB_ACTOR
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          pwd
+          ls
+          mvn clean install
+#          sudo snap install --classic hub
+#          mvn spring-boot:run
+          cd ~
+          ls -a
+#          ./upgrade-utility.sh upgrade.json
