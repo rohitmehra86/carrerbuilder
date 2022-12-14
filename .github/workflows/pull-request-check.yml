@@ -1,5 +1,5 @@
 ---
-name: On Pull Request checks
+name: Execute upgrade utility
 on:
   pull_request:
     branches:
@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           maven-version: ${{ matrix.maven }}
-      - name: Run Upgrade utility
+      - name: Build project
         env:
           FOLDER_PATH: ~/repo
           GITHUB_USER: $GITHIB_ACTOR
@@ -28,3 +28,12 @@ jobs:
           pwd
           ls
           mvn clean install
+
+      - name: Open Issue
+        if: failure()
+      - uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ASSIGNEES: $GITHIB_ACTOR
+        with:
+          assignees: $GITHUB_ACTOR
