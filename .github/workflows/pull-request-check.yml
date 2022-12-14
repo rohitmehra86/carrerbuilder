@@ -30,7 +30,7 @@ jobs:
           mvn clean install
       - name: Open Issue
         if: failure()
-      - uses: JasonEtco/create-an-issue@v2
+        uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ASSIGNEES: $GITHIB_ACTOR
