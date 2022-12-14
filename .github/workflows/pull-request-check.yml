@@ -46,7 +46,7 @@ jobs:
           # This data can be any valid JSON from a previous step in the GitHub Action
           payload: |
             {
-              "text": "Need to work on the <${{ steps.create-issue.outputs.url }}|issue",
+              "text": "Need to work on the <${{ steps.create-issue.outputs.url }}|issue>",
               "attachments": [
                 {
                   "pretext": "Need to work",
