@@ -19,6 +19,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           maven-version: ${{ matrix.maven }}
+      - uses: actions/checkout@v2
       - name: Build project
         env:
           FOLDER_PATH: ~/repo
