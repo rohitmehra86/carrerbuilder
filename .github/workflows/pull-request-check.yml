@@ -28,7 +28,6 @@ jobs:
           pwd
           ls
           mvn clean install
-
       - name: Open Issue
         if: failure()
       - uses: JasonEtco/create-an-issue@v2
