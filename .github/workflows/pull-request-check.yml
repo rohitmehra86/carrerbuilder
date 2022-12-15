@@ -4,8 +4,6 @@ on:
   pull_request:
     branches:
       - main
-#    paths:
-#      - '**/resources/upgrade/upgrade.json'
 jobs:
   compile:
     runs-on: ubuntu-latest
@@ -13,7 +11,7 @@ jobs:
       matrix:
         java:
           - 17
-    name: Initiates upgrade utility
+    name: On Pull Request checks
     timeout-minutes: 30
     steps:
       - name: Setup Maven Action
@@ -21,20 +19,59 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           maven-version: ${{ matrix.maven }}
+      - uses: actions/checkout@v2
 
+      - name: check-for-cc
+        id: check-for-cc
+        uses: agenthunt/conventional-commit-checker-action@v1.0.0
 
-      - name: Run Upgrade utility
+      - name: Build project
         env:
           FOLDER_PATH: ~/repo
           GITHUB_USER: $GITHIB_ACTOR
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pwd
           ls
           mvn clean install
-#          sudo snap install --classic hub
-#          mvn spring-boot:run
-          cd ~
-          ls -a
-#          ./upgrade-utility.sh upgrade.json
+          echo $GITHUB_ACTION
+      - name: Open Issue
+        id: create-issue
+        if: failure()
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          assignees: rohitmehra86
+      - name: Link Issue
+        if: failure()
+        uses: AsasInnab/pr-body-action@v1
+        with:
+          body: "Git workflow Failed: Created github issue i.e. ${{ steps.create-issue.outputs.url }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        if: failure()
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # This data can be any valid JSON from a previous step in the GitHub Action
+          payload: |
+            {
+              "text": "Need to work on the <${{ steps.create-issue.outputs.url }}|issue>",
+              "attachments": [
+                {
+                  "pretext": "Need to work",
+                  "color": "dbab09",
+                  "fields": [
+                    {
+                      "title": "Status",
+                      "short": true,
+                      "value": "Open"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
