@@ -56,15 +56,16 @@ jobs:
         if: failure()
         uses: AsasInnab/pr-body-action@v1
         with:
-          body: "Git workflow Failed: Created github issue i.e. ${{
-            steps.create-issue.outputs.url }}"
+          body: "Git workflow Failed: Created github issue i.e. ${{ steps.create-issue.outputs.url }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Send custom JSON data to Slack workflow
         id: slack
         if: failure()
         uses: slackapi/slack-github-action@v1.23.0
         with:
-          payload: >
+          # This data can be any valid JSON from a previous step in the GitHub Action
+          payload: |
             {
               "text": "Need to work on the <${{ steps.create-issue.outputs.url }}|issue>",
               "attachments": [
