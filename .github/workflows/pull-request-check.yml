@@ -41,7 +41,7 @@ jobs:
       - name: Link Issue
         uses: AsasInnab/pr-body-action@v1
         with:
-          body: "Issue in git workflow i.e. $SSSSS{{ steps.create-issue.outputs.url }}"
+          body: "Issue in git workflow i.e. ${{ steps.create-issue.outputs.url }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
