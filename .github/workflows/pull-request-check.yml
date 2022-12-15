@@ -22,17 +22,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Validate semantic commit message
         uses: influxdata/validate-semantic-github-messages/.github/workflows/semantic.yml@main
-        # optional; 250 is default and max
         with:
-          # optional, default is 250, max is 250, min is 0
           COMMITS_HISTORY: 1
-          # optional, default is false, when false no behavior change.
-          # When true:
-          #   If there is one commit, only validate its commit message (and not the PR title).
-          #   Else validate PR title only (and skip commit messages).
-          # This takes precedence over COMMITS_HISTORY.
           CHECK_PR_TITLE_OR_ONE_COMMIT: false
-
       - name: Build project
         env:
           FOLDER_PATH: ~/repo
@@ -55,16 +47,15 @@ jobs:
         if: failure()
         uses: AsasInnab/pr-body-action@v1
         with:
-          body: "Git workflow Failed: Created github issue i.e. ${{ steps.create-issue.outputs.url }}"
+          body: "Git workflow Failed: Created github issue i.e. ${{
+            steps.create-issue.outputs.url }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Send custom JSON data to Slack workflow
         id: slack
         if: failure()
         uses: slackapi/slack-github-action@v1.23.0
         with:
-          # This data can be any valid JSON from a previous step in the GitHub Action
-          payload: |
+          payload: >
             {
               "text": "Need to work on the <${{ steps.create-issue.outputs.url }}|issue>",
               "attachments": [
