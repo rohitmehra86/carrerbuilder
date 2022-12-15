@@ -42,7 +42,7 @@ jobs:
         if: failure()
         uses: AsasInnab/pr-body-action@v1
         with:
-          body: "Issue in git workflow i.e. ${{ steps.create-issue.outputs.url }}"
+          body: "Git workflow Failed: Created github issue i.e. ${{ steps.create-issue.outputs.url }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
