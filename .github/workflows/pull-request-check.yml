@@ -20,6 +20,9 @@ jobs:
           java-version: ${{ matrix.java }}
           maven-version: ${{ matrix.maven }}
       - uses: actions/checkout@v2
+      - name: check-for-cc
+          id: check-for-cc
+          uses: agenthunt/conventional-commit-checker-action@v1.0.0
       - name: Build project
         env:
           FOLDER_PATH: ~/repo
