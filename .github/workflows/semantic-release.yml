@@ -1,12 +1,17 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
 name: Release
 
 on:
   push:
     branches:
-      - master
+      - main
+#  pull_request:
+#    branches: [ master ]
 
 env:
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release:
@@ -23,8 +28,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 'lts/*'
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+#       - name: Build with Maven
+#         run: mvn -B package --file pom.xml
       - name: setup semantic-release
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog -D
       - name: release
