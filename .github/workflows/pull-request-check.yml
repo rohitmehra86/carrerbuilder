@@ -3,7 +3,7 @@ name: Pull Request check
 on:
   pull_request:
     branches:
-      - main
+      - master
 jobs:
   semantic:
     uses: influxdata/validate-semantic-github-messages/.github/workflows/semantic.yml@main
