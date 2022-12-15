@@ -30,15 +30,16 @@ jobs:
           ls
           mvn clean install
           echo $GITHUB_ACTION
-      - name: Open Issue
-        id: create-issue
-        if: failure()
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          assignees: rohitmehra86
+#      - name: Open Issue
+#        id: create-issue
+#        if: failure()
+#        uses: JasonEtco/create-an-issue@v2
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          assignees: rohitmehra86
       - name: Link Issue
+        if: failure()
         uses: kentaro-m/add-an-issue-reference-action@v2.0.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
