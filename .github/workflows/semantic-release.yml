@@ -4,8 +4,9 @@
 name: Release
 
 on:
-  push:
-    branches: [ master ]
+  pull_request:
+    branches:
+      - main
 #  pull_request:
 #    branches: [ master ]
 
