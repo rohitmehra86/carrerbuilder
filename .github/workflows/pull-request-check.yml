@@ -39,6 +39,7 @@ jobs:
         with:
           assignees: rohitmehra86
       - name: Link Issue
+        if: failure()
         uses: AsasInnab/pr-body-action@v1
         with:
           body: "Issue in git workflow i.e. ${{ steps.create-issue.outputs.url }}"
