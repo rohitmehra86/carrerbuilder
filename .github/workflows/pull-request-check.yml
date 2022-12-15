@@ -50,7 +50,6 @@ jobs:
           body: "Git workflow Failed: Created github issue i.e. ${{ steps.create-issue.outputs.url }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
       - name: Send custom JSON data to Slack workflow
         id: slack
         if: failure()
