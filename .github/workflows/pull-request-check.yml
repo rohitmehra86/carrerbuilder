@@ -40,9 +40,9 @@ jobs:
           assignees: rohitmehra86
       - name: Link Issue
         uses: kentaro-m/add-an-issue-reference-action@v2.0.0
-          with:
-            repo-token: "${{ secrets.GITHUB_TOKEN }}"
-            branch-prefix: "TICKET-"
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          branch-prefix: "TICKET-"
       - name: Send custom JSON data to Slack workflow
         id: slack
         if: failure()
