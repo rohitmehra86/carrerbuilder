@@ -1,5 +1,5 @@
 ---
-name: Execute upgrade utility
+name: Pull Request check
 on:
   pull_request:
     branches:
