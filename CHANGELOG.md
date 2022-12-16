@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.1.1](https://github.com/rohitmehra86/carrerbuilder/compare/v1.1.0...v1.1.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* **core:** Breaking change ([f970bef](https://github.com/rohitmehra86/carrerbuilder/commit/f970bef8f388253de452523c90d1b574f2659e6b))
+
 # [1.1.0](https://github.com/rohitmehra86/carrerbuilder/compare/v1.0.0...v1.1.0) (2022-12-16)
 
 
