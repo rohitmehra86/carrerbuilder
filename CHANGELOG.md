@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.1.0](https://github.com/rohitmehra86/carrerbuilder/compare/v1.0.0...v1.1.0) (2022-12-16)
+
+
+### Features
+
+* **core:** test minor release ([137ae4c](https://github.com/rohitmehra86/carrerbuilder/commit/137ae4c5e18f30562507661ca66af57a45079d6c))
+
 # 1.0.0 (2022-12-15)
 
 
